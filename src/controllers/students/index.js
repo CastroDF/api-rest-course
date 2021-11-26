@@ -1,8 +1,8 @@
-const UserSchema = require("../../models/users");
+const StudentSchema = require("../../models/students");
 
-const getUsers = async (req, res) => {
+const getStudents = async (req, res) => {
   try {
-    const response = await UserSchema.find();
+    const response = await StudentSchema.find();
     return res.status(200).json({
       data: response,
       error: false,
@@ -15,9 +15,9 @@ const getUsers = async (req, res) => {
   }
 };
 
-const getUserById = async (req, res) => {
+const getStudentById = async (req, res) => {
   try {
-    const response = await UserSchema.findOne({ _id: req.params.userId });
+    const response = await StudentSchema.findOne({ _id: req.params.studentId });
 
     if (!response || response.length === 0) {
       return res.status(404).json({
@@ -38,35 +38,9 @@ const getUserById = async (req, res) => {
   }
 };
 
-const userLogin = async (req, res) => {
+const addStudent = async (req, res) => {
   try {
-    const response = await UserSchema.findOne({
-      username: req.body.username,
-      password: req.body.password,
-    });
-
-    if (!response || response.length === 0) {
-      return res.status(404).json({
-        error: true,
-        message: "User not found",
-      });
-    }
-
-    return res.status(200).json({
-      data: response,
-      error: false,
-    });
-  } catch (error) {
-    return res.status(400).json({
-      error: true,
-      message: error,
-    });
-  }
-};
-
-const addUser = async (req, res) => {
-  try {
-    const user = new UserSchema(req.body);
+    const user = new StudentSchema(req.body);
     const newUser = await user.save();
 
     return res.status(201).json({
@@ -81,10 +55,10 @@ const addUser = async (req, res) => {
   }
 };
 
-const deleteUserById = async (req, res) => {
+const deleteStudentById = async (req, res) => {
   try {
-    const response = await UserSchema.findOneAndRemove({
-      _id: req.params.userId,
+    const response = await StudentSchema.findOneAndRemove({
+      _id: req.params.studentId,
     });
     if (!response || response.length === 0) {
       return res.status(404).json({
@@ -106,9 +80,8 @@ const deleteUserById = async (req, res) => {
 };
 
 module.exports = {
-  getUsers,
-  getUserById,
-  userLogin,
-  addUser,
-  deleteUserById,
+  getStudents,
+  getStudentById,
+  addStudent,
+  deleteStudentById,
 };

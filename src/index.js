@@ -6,11 +6,11 @@ require("dotenv/config");
 const app = express();
 const router = require("./routes");
 
-app.use(express.json());
-app.use("/", router);
-
 // CORS
 app.use(cors());
+
+app.use(express.json());
+app.use("/", router);
 
 mongoose
   .connect(process.env.mongoURL)

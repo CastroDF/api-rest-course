@@ -1,8 +1,8 @@
-# API Rest Course
+# BDA Boards Server
 
 ## What is about?
 
-Is a simple API Rest to manage Clients.
+Is an API Rest to manage users.
 
 ## Technology stack
 

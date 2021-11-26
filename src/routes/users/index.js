@@ -7,6 +7,8 @@ router.route("/").get(controller.getUsers);
 
 router.route("/:userId").get(controller.getUserById);
 
+router.route("/login").post(controller.userLogin);
+
 router.route("/").post(controller.addUser);
 
 router.route("/:userId").delete(controller.deleteUserById);
