@@ -22,7 +22,7 @@ const getUserById = async (req, res) => {
     if (!response || response.length === 0) {
       return res.status(404).json({
         error: true,
-        message: "Client not found",
+        message: "User not found",
       });
     }
 
@@ -41,7 +41,7 @@ const getUserById = async (req, res) => {
 const userLogin = async (req, res) => {
   try {
     const response = await UserSchema.findOne({
-      username: req.body.username,
+      username: req.body.username.toLowerCase(),
       password: req.body.password,
     });
 
@@ -66,6 +66,7 @@ const userLogin = async (req, res) => {
 
 const addUser = async (req, res) => {
   try {
+    req.body.username = req.body.username.toLowerCase();
     const user = new UserSchema(req.body);
     const newUser = await user.save();
 

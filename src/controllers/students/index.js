@@ -22,7 +22,7 @@ const getStudentById = async (req, res) => {
     if (!response || response.length === 0) {
       return res.status(404).json({
         error: true,
-        message: "Client not found",
+        message: "Student not found",
       });
     }
 
