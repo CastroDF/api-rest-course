@@ -1,15 +1,11 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
-const path = require("path");
 require("dotenv/config");
 
 const PORT = process.env.PORT || 5000;
 
 const app = express();
-
-// Serve client
-app.use(express.static(path.join(__dirname + "/build")));
 
 const router = require("./routes");
 
@@ -20,7 +16,7 @@ app.use(express.json());
 app.use("/", router);
 
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname + "/build/index.html"));
+  res.send("The possible resources are students and users");
 });
 
 mongoose
