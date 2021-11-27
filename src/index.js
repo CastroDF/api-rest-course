@@ -4,6 +4,8 @@ const cors = require("cors");
 const path = require("path");
 require("dotenv/config");
 
+const PORT = process.env.PORT || 5000;
+
 const app = express();
 
 // Serve client
@@ -22,7 +24,7 @@ app.get("*", (req, res) => {
 });
 
 mongoose
-  .connect(process.env.mongoURL)
+  .connect(process.env.DATABASE_URL)
   .then(() => {
     console.log("Database connected");
   })
@@ -30,6 +32,6 @@ mongoose
     console.log(`Database not connected, error: ${error}`);
   });
 
-app.listen(process.env.PORT, () => {
-  console.log(`Example API listening at http://localhost:${process.env.PORT}`);
+app.listen(PORT, () => {
+  console.log(`Example API listening at http://localhost:${PORT}`);
 });
